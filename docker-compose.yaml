@@ -1,0 +1,28 @@
+version: '3.7'
+
+
+services:
+  mysql: 
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ./schema:/docker-entrypoint-initdb.d 
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: blogs_db
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      mysql_net:
+        ipv4_address: 172.123.1.2
+
+
+networks:
+  mysql_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.123.1.0/24
+

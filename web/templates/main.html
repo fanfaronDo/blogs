@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .navbar-nav {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+        .navbar-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .navbar-nav a:hover {
+            background-color: #555;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .card-body {
+            padding: 15px;
+        }
+        .d-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-nav">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Projects</h1>
+        <div class="row">
+            {{range .RecordPerPage}}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{.Title}}</h5>
+                    <p class="card-text">{{.Description}}</p>
+                </div>
+            </div>
+            {{end}}
+        </div>
+        <div class="d-flex">
+            {{if gt .CurrentPage 1}}
+            <a class="btn" href="?path={{.Previous}}">Previous</a>
+            {{end}}
+            <span> Page {{.CurrentPage}} of {{.TotalPage}} </span>
+            {{if lt .CurrentPage .TotalPage}}
+            <a class="btn" href="?path={{.Next}}">Next</a>
+            {{end}}
+        </div>
+    </div>
+</div>
+</body>
+</html>
